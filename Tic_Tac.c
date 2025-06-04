@@ -10,8 +10,6 @@
 *************************************************************************************************************************************************************/
 
 #include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 
 char box[10] = { '0', '1' ,'2', '3', '4', '5', '6', '7', '8', '9' };
 
@@ -33,39 +31,12 @@ int main()
 
 		mark = (player == 1) ? 'X' : 'O';
 
-		if(choice == 1 && box[1] == '1')
-			box[1] = mark;
-
-		else if(choice == 2 && box[2] == '2')
-			box[2] = mark;
-
-		else if(choice == 3 && box[3] == '3')
-			box[3] = mark;
-
-		else if(choice == 4 && box[4] == '4')
-			box[4] = mark;
-
-		else if(choice == 5 && box[5] == '5')
-			box[5] = mark;
-
-		else if(choice == 6 && box[6] == '6')
-			box[6] = mark;
-
-		else if(choice == 7 && box[7] == '7')
-			box[7] = mark;
-
-		else if(choice == 8 && box[8] == '8')
-			box[8] = mark;
-
-		else if(choice == 9 && box[9] == '9')
-			box[9] = mark;
-
-		else
-		{
+		if (choice >= 1 && choice <= 9 && box[choice] == (choice + '0')) {
+			box[choice] = mark;
+		} else {
 			printf("Invalid move!!! ");
-
-			player--;
-			getchar();
+			player--; // Decrement player only if the move is invalid to counteract the increment at the end of the loop.
+			// getchar(); // We will remove this in a later step, but note its original position.
 		}
 		i = checkwin();
 
@@ -137,7 +108,9 @@ int checkwin()
 
 void board()
 {
-	system("cls");
+	for (int k = 0; k < 25; k++) {
+		printf("\n");
+	}
 	printf("\n\n\tTic Tac Toe\n\n");
 
 	printf("Player 1 (X) -Player 2(O)\n\n\n");
